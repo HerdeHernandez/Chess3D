@@ -424,6 +424,21 @@ public class Pawn : MonoBehaviour
                 toLeftDown();
             }
         }
+
+        canBeEaten();
+    }
+
+    void canBeEaten()
+    {
+        foreach (string str in this.GetComponent<Piece>().availableMoves)
+        {
+            Transform move = GameObject.Find(str).transform;
+
+            if (move.childCount > 1)
+            {
+                move.GetChild(1).GetComponent<Piece>().canBeEaten = true;
+            }
+        }
     }
 
     void onMoved(string move, int index)

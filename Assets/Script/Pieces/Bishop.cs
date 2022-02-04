@@ -415,6 +415,8 @@ public class Bishop : MonoBehaviour
             toLeftDown();
             toRightDown();
         }
+
+        canBeEaten();
     }
 
     void onMoved()
@@ -437,6 +439,19 @@ public class Bishop : MonoBehaviour
                         chessManager.onMoved = true;
                     }
                 }
+            }
+        }
+    }
+
+    void canBeEaten()
+    {
+        foreach (string str in this.GetComponent<Piece>().availableMoves)
+        {
+            Transform move = GameObject.Find(str).transform;
+
+            if (move.childCount > 1)
+            {
+                move.GetChild(1).GetComponent<Piece>().canBeEaten = true;
             }
         }
     }

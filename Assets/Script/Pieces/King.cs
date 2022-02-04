@@ -8,6 +8,8 @@ public class King : MonoBehaviour
     public string castling;
     public bool check, checkmate;
 
+    List<bool> canBeEaten = new List<bool>();
+
     void Move(int childIndex)
     {
         if (this.transform.parent.parent.GetChild(childIndex).childCount > 1)
@@ -394,6 +396,8 @@ public class King : MonoBehaviour
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
 
+        
+
         //list of pieces
         //ilist if can be eaten
 
@@ -419,14 +423,15 @@ public class King : MonoBehaviour
             foreach (string str in this.GetComponent<Piece>().availableMoves)
             {
                 StartCoroutine(remove(str));  
-            }            
+            }
+
+            if (this.GetComponent<Piece>().availableMoves.Count == 0 && this.GetComponent<King>().check == false)
+            {
+                StartCoroutine(chessManager.stalemate());
+            }
         }
 
-        if (this.GetComponent<Piece>().availableMoves.Count == 0 && this.GetComponent<King>().check == false)
-        {
-            StartCoroutine(chessManager.stalemate());
-
-        }
+       
     }
 
    IEnumerator remove(string str)

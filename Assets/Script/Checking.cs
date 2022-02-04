@@ -22,18 +22,16 @@ public class Checking : MonoBehaviour
             {               
                 if (tileName.GetChild(1).name.Contains("King") && tileName.GetChild(1).tag != this.tag)
                 {
-                    print(tileName.GetChild(1).GetComponent<Piece>().availableMoves.Count);
-                    print(canbeEaten);
+                    //print(tileName.GetChild(1).GetComponent<Piece>().availableMoves.Count);
+                    //print(canbeEaten);
                     if (tileName.GetChild(1).GetComponent<Piece>().availableMoves.Count > 0 && canbeEaten == false)
                     {                        
                         tileName.GetChild(1).GetComponent<King>().checkmate = false;
                         tileName.GetChild(1).GetComponent<King>().check = true;
-                        print(1.7);
                         editNotation("+");
                     }
                     else if (canbeEaten == true)
                     {
-                        print(1.1);
                         tileName.GetChild(1).GetComponent<King>().checkmate = false;
                         tileName.GetChild(1).GetComponent<King>().check = true;
 
@@ -79,7 +77,7 @@ public class Checking : MonoBehaviour
 
     public void checkMate(Transform tileName)
     {
-        print(0);
+        //print(0);
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
 
         //i = same piece color count minus the king (for reference)
@@ -131,7 +129,7 @@ public class Checking : MonoBehaviour
 
                                 if (!this.GetComponent<Piece>().availableMoves.Contains(tileName.name))
                                 {
-                                    print(1);
+                                    //print(1);
                                     tileName.GetChild(1).GetComponent<King>().checkmate = false;
                                     tileName.GetChild(1).GetComponent<King>().check = true;
 
@@ -150,7 +148,7 @@ public class Checking : MonoBehaviour
                            
                             if (i == j && child.GetChild(1).GetComponent<Piece>().availableMoves.Count == k)
                             {
-                                print(2);
+                                //print(2);
                                 StartCoroutine(chessManager.checkMate(tileName.GetChild(1).tag));
                                 editNotation("#");
                                 return;
@@ -194,8 +192,7 @@ public class Checking : MonoBehaviour
                 {                  
                     if (child.GetChild(1).GetComponent<Piece>().availableMoves.Contains(kingWhite.parent.name))
                     {
-                        kingWhite.GetComponent<Piece>().canBeEaten = true;
-                  
+                        kingWhite.GetComponent<Piece>().canBeEaten = true;                  
                     }
                 }
             }

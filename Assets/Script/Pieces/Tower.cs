@@ -425,6 +425,8 @@ public class Tower : MonoBehaviour
             right();
             left();
         }
+
+        canBeEaten();
     }
 
     void onMoved()
@@ -447,6 +449,19 @@ public class Tower : MonoBehaviour
                         chessManager.onMoved = true;
                     }
                 }
+            }
+        }
+    }
+
+    void canBeEaten()
+    {
+        foreach (string str in this.GetComponent<Piece>().availableMoves)
+        {
+            Transform move = GameObject.Find(str).transform;
+
+            if (move.childCount > 1)
+            {
+                move.GetChild(1).GetComponent<Piece>().canBeEaten = true;
             }
         }
     }
