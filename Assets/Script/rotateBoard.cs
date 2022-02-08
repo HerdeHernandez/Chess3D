@@ -5,7 +5,7 @@ using UnityEngine;
 public class rotateBoard : MonoBehaviour
 {
 
-    float speed = 10f;
+    float speed = 5f;
     public void OnMouseDrag()
     {
         float rotX = Input.GetAxis("Mouse X") * speed;
