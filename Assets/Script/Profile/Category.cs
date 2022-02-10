@@ -50,8 +50,6 @@ public class Category : MonoBehaviour
                     type = child.name + " " + children.GetChild(0).GetComponent<Text>().text;
                     type = type.Replace("\n", " ");
                     type = type.Replace("min", "Minute(s)");
-
-                    print(type);
                 }
             }
         }
