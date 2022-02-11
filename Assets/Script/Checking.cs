@@ -77,13 +77,12 @@ public class Checking : MonoBehaviour
 
     public void checkMate(Transform tileName)
     {
-        //print(0);
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
 
         //i = same piece color count minus the king (for reference)
         //j = same piece color count minus the king (for real count)
        
-        //k = move count of i 
+        //k = move count of j 
 
         int i = 0, j = 0, k = 0;
 
