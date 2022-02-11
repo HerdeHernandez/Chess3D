@@ -44,6 +44,8 @@ public class ProfileManager : MonoBehaviour
         // Set Data
         playerName.text = name;
         profile.sprite = sprite;
+
+          
     }
 
     public void showList(string onlineList)

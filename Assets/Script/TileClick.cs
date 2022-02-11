@@ -430,19 +430,39 @@ public class TileClick : MonoBehaviour
 
     public void moveOtherBoard(string parentNotation)
     {
-        movePiece(parentNotation);
+        StartCoroutine(movePiece(parentNotation));
     }
 
-    void movePiece(string parentNotation)
+    IEnumerator movePiece(string parentNotation)
     {
         string[] pn = parentNotation.Split('|');
         string newParent = pn[0];
         string notation = pn[1];
-     
+
         Transform newTile = GameObject.Find(newParent).transform;
+        yield return new WaitForSeconds(.001f);
+        
         this.transform.GetChild(1).parent = newTile;
 
         newTile.GetComponent<TileClick>().Move = notation;
+       
+
+        var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
+
+        if (newTile.GetChild(1).tag == "White")
+        {
+            chessManager.Player = "Black";
+            chessManager.whiteMoves.Add(notation);
+          //  this.GetComponent<Notation>().showNotation(notation, Notation.GetChild(0));
+        }
+
+        else if (newTile.GetChild(1).tag == "Black")
+        {
+            chessManager.Player = "White";
+            chessManager.blackMoves.Add(notation);
+          //  this.GetComponent<Notation>().showNotation(notation, Notation.GetChild(1));
+        }
+
         newTile.GetComponent<TileClick>().eatPiece();
 
         /*if (newTile.transform.childCount > 2)
