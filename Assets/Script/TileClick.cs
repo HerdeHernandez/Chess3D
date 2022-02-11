@@ -440,36 +440,36 @@ public class TileClick : MonoBehaviour
         string notation = pn[1];
 
         Transform newTile = GameObject.Find(newParent).transform;
-        yield return new WaitForSeconds(.001f);
-        
+        newTile.GetComponent<TileClick>().Move = notation;
+
+        yield return new WaitForSeconds(.001f);        
         this.transform.GetChild(1).parent = newTile;
 
-        newTile.GetComponent<TileClick>().Move = notation;
-       
+        if (newTile.transform.childCount > 2)
+        {
+            newTile.transform.GetChild(2).SetSiblingIndex(1);
+        }
+
+        newTile.transform.GetChild(1).localPosition = new Vector3(0, 0, 0);
 
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
+
+        newTile.GetComponent<TileClick>().eatPiece();
 
         if (newTile.GetChild(1).tag == "White")
         {
             chessManager.Player = "Black";
             chessManager.whiteMoves.Add(notation);
-          //  this.GetComponent<Notation>().showNotation(notation, Notation.GetChild(0));
         }
 
         else if (newTile.GetChild(1).tag == "Black")
         {
             chessManager.Player = "White";
             chessManager.blackMoves.Add(notation);
-          //  this.GetComponent<Notation>().showNotation(notation, Notation.GetChild(1));
         }
 
-        newTile.GetComponent<TileClick>().eatPiece();
 
-        /*if (newTile.transform.childCount > 2)
-        {
-            newTile.transform.GetChild(2).SetSiblingIndex(1);
-            Destroy(newTile.transform.GetChild(2).gameObject);
-        }
+        /*
         newTile.GetChild(1).localPosition = new Vector3(0, 0, 0);
 
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
