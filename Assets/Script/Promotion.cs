@@ -216,8 +216,16 @@ public class Promotion : MonoBehaviour
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
 
-        yield return new WaitForSeconds(.01f);
-        PieceDetails.transform.parent.GetComponent<TileClick>().checking();
+        yield return new WaitForSeconds(.01f);        ;
+
+
+        PieceDetails.transform.parent.GetComponent<TileClick>().Move = "";
+        chessManager.square = "";
+        PieceDetails.transform.parent.GetComponent<TileClick>().childIndex = 0;        
+        PieceDetails.transform.parent.GetComponent<TileClick>().reset();
+        PieceDetails.transform.parent.GetComponent<TileClick>().showMoves();
+        StartCoroutine(PieceDetails.transform.parent.GetComponent<TileClick>().checking());
+        PieceDetails.transform.parent.GetComponent<TileClick>().stalemate();
 
         if (chessManager.Me == "White")
         {
@@ -245,6 +253,8 @@ public class Promotion : MonoBehaviour
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
         Transform Notation = GameObject.Find("Chess Canvas").transform.GetChild(1).GetChild(2).GetChild(0).GetChild(0);
+
+        print(piece + "-" + notation + newNotation);
 
 #if UNITY_WEBGL && !UNITY_EDITOR
         promotion(piece + "-"+ notation + newNotation, squareName);

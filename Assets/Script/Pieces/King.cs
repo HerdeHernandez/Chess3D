@@ -394,12 +394,7 @@ public class King : MonoBehaviour
 
     public void removeMoves()
     {
-        var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
-
-        
-
-        //list of pieces
-        //ilist if can be eaten
+        var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();        
 
         if (this.GetComponent<Piece>().availableMoves.Count > 0)
         {

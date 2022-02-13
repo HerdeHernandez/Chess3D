@@ -103,6 +103,9 @@ public class TileClick : MonoBehaviour
                         }
                         else
                         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+                            squareClick(child.name, this.name, Move);
+#endif
                             yield return new WaitForSeconds(.001f);
 
                             this.transform.GetChild(1).localPosition = new Vector3(0, 0, 0);
@@ -118,6 +121,8 @@ public class TileClick : MonoBehaviour
                             
                             eatPiece();
                             promotion();
+
+                            
 
                             if (this.transform.GetChild(1).tag == "White" && chessManager.promotion == false)
                             {
@@ -135,9 +140,7 @@ public class TileClick : MonoBehaviour
 
 
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-                            squareClick(child.name, this.name, Move);
-#endif
+
                         }
 
                         /*  if (chessManager.promotion == false)
@@ -172,8 +175,12 @@ public class TileClick : MonoBehaviour
                         }
                         else
                         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+                             squareClick(child.name, this.name, Move);
+#endif
+                        }
 
-                            yield return new WaitForSeconds(.001f);
+                        yield return new WaitForSeconds(.001f);
                             this.transform.GetChild(1).localPosition = new Vector3(0, 0, 0);
                             this.transform.GetChild(1).GetComponent<Piece>().selected = false;
                             this.transform.GetChild(1).GetComponent<Piece>().hasMoved = true;
@@ -198,10 +205,7 @@ public class TileClick : MonoBehaviour
                             kingBlack.GetComponent<King>().checkmate = false;
 
 
-#if UNITY_WEBGL && !UNITY_EDITOR
-                             squareClick(child.name, this.name, Move);
-#endif
-                        }
+
 
                         /*if (chessManager.promotion == false)
                         {
@@ -218,7 +222,7 @@ public class TileClick : MonoBehaviour
                         children.GetChild(0).gameObject.SetActive(false);
                     }
 
-                    childIndex = 0;
+                    
                     break;
                 }
             }
@@ -268,6 +272,8 @@ public class TileClick : MonoBehaviour
 
     public void eatPiece()
     {
+        childIndex = this.transform.GetSiblingIndex();
+
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
         var notation = this.GetComponent<Notation>();
 
@@ -353,10 +359,12 @@ public class TileClick : MonoBehaviour
 
         Move = "";
         chessManager.square = "";
-        stalemate();
+        childIndex = 0;
+  
         reset();
         showMoves();
         StartCoroutine(checking());
+        stalemate();
     }
 
     public void reset()
@@ -439,11 +447,13 @@ public class TileClick : MonoBehaviour
         string newParent = pn[0];
         string notation = pn[1];
 
-        Transform newTile = GameObject.Find(newParent).transform;
+        Transform newTile = GameObject.Find(newParent).transform;        
+
+        yield return new WaitForSeconds(.001f);
+
         newTile.GetComponent<TileClick>().Move = notation;
 
-        yield return new WaitForSeconds(.001f);        
-        this.transform.GetChild(1).parent = newTile;
+        this.transform.GetChild(1).parent = newTile;        
 
         if (newTile.transform.childCount > 2)
         {
@@ -452,9 +462,9 @@ public class TileClick : MonoBehaviour
 
         newTile.transform.GetChild(1).localPosition = new Vector3(0, 0, 0);
 
-        var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
-
         newTile.GetComponent<TileClick>().eatPiece();
+
+        var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();        
 
         if (newTile.GetChild(1).tag == "White")
         {
@@ -531,11 +541,11 @@ public class TileClick : MonoBehaviour
         }
 
         chessManager.promotion = false;
-
-        stalemate();
+        
         reset();
         showMoves();
         StartCoroutine(checking());
+        stalemate();
     }
 
     void pieceDetails(GameObject piece, int rotation, Material material, string tag)
