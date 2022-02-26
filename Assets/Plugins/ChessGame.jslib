@@ -38,6 +38,10 @@ mergeInto(LibraryManager.library, {
 
     checkmate : function (email, color) {
         unityPlayerCheckmate(Pointer_stringify(email), Pointer_stringify(color));
+    },
+
+    scoring : function (score) {
+       
     }
 
 

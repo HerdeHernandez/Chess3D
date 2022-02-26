@@ -104,7 +104,14 @@ public class TileClick : MonoBehaviour
                         else
                         {
 #if UNITY_WEBGL && !UNITY_EDITOR
-                            squareClick(child.name, this.name, Move);
+                        if (chessManager.promotion == false)
+                        {
+                            squareClick(child.name, this.name, notation);
+                        }
+                        else
+                        {
+                            squareClick(child.name, this.name, notation + "-true");
+                        }
 #endif
                             yield return new WaitForSeconds(.001f);
 
@@ -176,7 +183,14 @@ public class TileClick : MonoBehaviour
                         else
                         {
 #if UNITY_WEBGL && !UNITY_EDITOR
-                             squareClick(child.name, this.name, Move);
+                        if (chessManager.promotion == false)
+                        {
+                            squareClick(child.name, this.name, notation);
+                        }
+                        else
+                        {
+                            squareClick(child.name, this.name, notation + "-true");
+                        }
 #endif
                         }
 
@@ -221,7 +235,6 @@ public class TileClick : MonoBehaviour
                     {
                         children.GetChild(0).gameObject.SetActive(false);
                     }
-
                     
                     break;
                 }
@@ -464,18 +477,21 @@ public class TileClick : MonoBehaviour
 
         newTile.GetComponent<TileClick>().eatPiece();
 
-        var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();        
+        var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
 
-        if (newTile.GetChild(1).tag == "White")
+        if (!notation.Contains("true"))
         {
-            chessManager.Player = "Black";
-            chessManager.whiteMoves.Add(notation);
-        }
+            if (newTile.GetChild(1).tag == "White")
+            {
+                chessManager.Player = "Black";
+                chessManager.whiteMoves.Add(notation);
+            }
 
-        else if (newTile.GetChild(1).tag == "Black")
-        {
-            chessManager.Player = "White";
-            chessManager.blackMoves.Add(notation);
+            else if (newTile.GetChild(1).tag == "Black")
+            {
+                chessManager.Player = "White";
+                chessManager.blackMoves.Add(notation);
+            }
         }
 
 
@@ -501,7 +517,6 @@ public class TileClick : MonoBehaviour
                 chessManager.blackMoves.Add(notation);
                 this.GetComponent<Notation>().showNotation(notation, Notation.GetChild(1));
             }
-
         }
 
         stalemate();

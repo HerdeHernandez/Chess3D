@@ -31,15 +31,15 @@ public class ChessGameController : MonoBehaviour
     public List<string> whiteMoves = new List<string>();
 
     public List<string> blackMoves = new List<string>();
-    /// <summary>
-    /// //
-    /// </summary>
 
     [DllImport("__Internal")]
     private static extern void UnityGetMyColor();
 
     [DllImport("__Internal")]
     private static extern void checkmate(string email, string color);
+
+    [DllImport("__Internal")]
+    private static extern void scoring(int score);
 
 
     private void Start()
@@ -56,21 +56,8 @@ public class ChessGameController : MonoBehaviour
 #endif
     }
 
-    void centerMovePiece()
-    {
-        foreach (Transform child in tilesParent)
-        {
-            if (child.childCount > 1)
-            {
-              
-            }
-        }
-    }
-
     void Update()
     {
-        centerMovePiece();
-
         if (myBoard ==  true && otherBoard == true)
         {
             gameStart = true;
@@ -340,7 +327,7 @@ public class ChessGameController : MonoBehaviour
     public IEnumerator timeOut(string player)
     {
         yield return new WaitForSeconds(.05f);
-        Transform endPanel = GameObject.Find("Chess Canvas").transform.GetChild(3);
+       /* Transform endPanel = GameObject.Find("Chess Canvas").transform.GetChild(3);
         endPanel.gameObject.SetActive(true);
 
         if (Me == player)
@@ -350,7 +337,7 @@ public class ChessGameController : MonoBehaviour
         else
         {
             endPanel.GetComponent<EndGame>().Standing.text = "You Win (TimeOut)";
-        }
+        }*/
     }
 
     public IEnumerator resign(string email)
@@ -367,6 +354,13 @@ public class ChessGameController : MonoBehaviour
         {
             endPanel.GetComponent<EndGame>().Standing.text = "You Lose (Resign)";
         }
+    }
+
+    void sendScore(int score)
+    {
+#if UNITY_WEBGL && !UNITY_EDITOR
+        scoring(score);
+#endif
     }
 }
 
