@@ -17,6 +17,7 @@ public class Piece : MonoBehaviour
         
     }
 
+    //select/deselect
     public void pieceClick()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -60,6 +61,7 @@ public class Piece : MonoBehaviour
         }
     }
 
+    //generate moves
     public void showMoves()
     {      
         if (this.name.Contains("Pawn"))

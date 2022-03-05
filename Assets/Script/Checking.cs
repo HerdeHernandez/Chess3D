@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 
 public class Checking : MonoBehaviour
 {
+    //check every piece available moves if there's a king
     public void checking()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -48,6 +49,7 @@ public class Checking : MonoBehaviour
         }
     }
 
+    //edit notation for check & checkmate
     void editNotation(string notation)
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -75,6 +77,7 @@ public class Checking : MonoBehaviour
         }        
     }
 
+    //check every piece available moves of the same color of the checked king, if the available moves can blocked the piece that checked the king
     public void checkMate(Transform tileName)
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -167,6 +170,7 @@ public class Checking : MonoBehaviour
         }
     }
 
+    //if the king can be eaten
     public void canBeEaten()
     {
         //  var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();

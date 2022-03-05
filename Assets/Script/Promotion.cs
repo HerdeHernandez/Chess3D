@@ -30,6 +30,7 @@ public class Promotion : MonoBehaviour
         setColor(chessManager);
     }
 
+    // set the color
     void setColor(ChessGameController chessManager)
     {
         if (chessManager.Me == "White")
@@ -68,6 +69,7 @@ public class Promotion : MonoBehaviour
         }
     }
 
+    //if queen is selected
     public void queen()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -105,6 +107,7 @@ public class Promotion : MonoBehaviour
         }
     }
 
+    //if bishop is selected
     public void bishop()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -140,6 +143,7 @@ public class Promotion : MonoBehaviour
         }
     }
 
+    //if rook is selected
     public void rook()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -176,6 +180,8 @@ public class Promotion : MonoBehaviour
         }        
     }
 
+
+    //if knight is selected
     public void knight()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -212,12 +218,12 @@ public class Promotion : MonoBehaviour
         }
     }
 
+    //will generate new moves
     IEnumerator checking(Transform PieceDetails)
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
 
-        yield return new WaitForSeconds(.01f);        ;
-
+        yield return new WaitForSeconds(.01f);       
 
         PieceDetails.transform.parent.GetComponent<TileClick>().Move = "";
         chessManager.square = "";
@@ -239,6 +245,7 @@ public class Promotion : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
+    //spawn piece
     void pieceDetails(GameObject piece, int rotation, Material material, string tag)
     {
         piece.GetComponent<RectTransform>().localScale = new Vector3(1576.05f, 13572, 1576.05f);
@@ -249,6 +256,7 @@ public class Promotion : MonoBehaviour
         piece.gameObject.tag = tag;       
     }
 
+    //edi notation for promotion
     void editNotation(string piece, string newNotation, string squareName)
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();

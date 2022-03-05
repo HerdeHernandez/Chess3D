@@ -17,6 +17,7 @@ public class ProfileManager : MonoBehaviour
 
     public GameObject invitationPanel, replyPanel, loadingPanel, exitPanel;
 
+    //get my data and all online players data
     void Start()
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -29,6 +30,7 @@ public class ProfileManager : MonoBehaviour
 
     }
 
+    //set my data
     public void setPlayerData(string playerData)
     {
         string[] data = playerData.Split('|');
@@ -48,6 +50,7 @@ public class ProfileManager : MonoBehaviour
           
     }
 
+    //show list of online players
     public void showList(string onlineList)
     {
         Matching matching = this.transform.parent.GetChild(3).GetComponent<Matching>();
@@ -80,6 +83,7 @@ public class ProfileManager : MonoBehaviour
         }        
     }
 
+    //invite player
     public void invite(string data)
     {
         invitationPanel.SetActive(true);
@@ -87,11 +91,13 @@ public class ProfileManager : MonoBehaviour
         invitationPanel.GetComponent<inivtationManager>().setInviterData(data);
     }
 
+    //exit game
     public void exit()
     {
         exitPanel.SetActive(true);
     }
 
+    //load animatons
     public void load()
     {
         StartCoroutine(loading());

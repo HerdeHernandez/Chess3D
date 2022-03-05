@@ -16,6 +16,7 @@ public class inivtationManager : MonoBehaviour
 
     public Image profile;
     
+    //WEB FUNCTION inviter data
     public void setInviterData(string InviterData)
     {
         string[] data = InviterData.Split('|');

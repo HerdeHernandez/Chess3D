@@ -7,6 +7,7 @@ public class Loading : MonoBehaviour
 {
     public Slider slider;
 
+    //loading animations
     void Start()
     {
         slider.value = 0;

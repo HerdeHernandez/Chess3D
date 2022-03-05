@@ -12,6 +12,7 @@ public class selectCategory : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     [DllImport("__Internal")]
     private static extern void GetPlayerInfo();
 
+    //select category
     public void select()
     {
         foreach (Transform child in this.transform.parent.parent)
@@ -32,6 +33,7 @@ public class selectCategory : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         this.transform.GetChild(0).GetComponent<Text>().color = new Color32(255, 255, 255, 255);
     }
 
+    //animations
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (selected == false)
@@ -40,7 +42,7 @@ public class selectCategory : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         
     }
-
+    //animations
     public void OnPointerExit(PointerEventData eventData)
     {
         if (selected == false)

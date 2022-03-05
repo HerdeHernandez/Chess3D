@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Notation : MonoBehaviour
 {
+
+    //notation identifier
     public void notation(string childName, string tileName)
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -44,6 +46,7 @@ public class Notation : MonoBehaviour
         }
     }
 
+    //add notation
     public void addingNotation(string notation)
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -61,6 +64,7 @@ public class Notation : MonoBehaviour
         }
     }
 
+    //show notation on canvas
     public void showNotation(string Notation, Transform color)
     {
         var text = Resources.Load("Text") as GameObject;
@@ -69,6 +73,8 @@ public class Notation : MonoBehaviour
         textDetails.GetComponent<Text>().text = Notation;
     }
 
+
+    //fix vertical layout group not updating every new notation
     private void Update()
     {
         Transform Notation = GameObject.Find("Chess Canvas").transform.GetChild(1).GetChild(2).GetChild(0).GetChild(0);

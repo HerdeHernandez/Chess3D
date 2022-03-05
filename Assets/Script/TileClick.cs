@@ -15,6 +15,7 @@ public class TileClick : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void squareClick(string tileName, string thisName, string notation);
 
+    //Click on every tile
     public void OnMouseDown()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -49,6 +50,8 @@ public class TileClick : MonoBehaviour
         }
     }
 
+    
+    //piece moving
     IEnumerator moving()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -242,6 +245,7 @@ public class TileClick : MonoBehaviour
         }
     }    
 
+    //pawn promotion
     void promotion()
     {
         var chessManager = GameObject.Find("GameController").GetComponent<ChessGameController>();
@@ -283,6 +287,7 @@ public class TileClick : MonoBehaviour
         }
     }    
 
+    //eating piece
     public void eatPiece()
     {
         childIndex = this.transform.GetSiblingIndex();
@@ -380,6 +385,7 @@ public class TileClick : MonoBehaviour
         stalemate();
     }
 
+    //will reset all pieces available moves
     public void reset()
     {
         foreach (Transform child in this.transform.parent)
@@ -396,6 +402,7 @@ public class TileClick : MonoBehaviour
 
     }
 
+    // generate new moves
     public void showMoves()
     {
         foreach (Transform child in this.transform.parent)
@@ -408,13 +415,14 @@ public class TileClick : MonoBehaviour
         }
     }
 
+    //delay checking
     public IEnumerator checking()
     {    
         yield return new WaitForSeconds(.1f);
-        moveChecking();
-       
+        moveChecking();       
     }
 
+    //checking
     public void moveChecking()
     {
         foreach (Transform child in this.transform.parent)
@@ -435,6 +443,7 @@ public class TileClick : MonoBehaviour
         }
     }
 
+    //for stalemate
     public void stalemate()
     {
         foreach (Transform child in this.transform.parent)
@@ -449,11 +458,13 @@ public class TileClick : MonoBehaviour
         }
     }
 
+    //WEB FUNCTION 
     public void moveOtherBoard(string parentNotation)
     {
         StartCoroutine(movePiece(parentNotation));
     }
 
+    //WEB FUNCTION piece moving
     IEnumerator movePiece(string parentNotation)
     {
         string[] pn = parentNotation.Split('|');
@@ -525,6 +536,7 @@ public class TileClick : MonoBehaviour
         StartCoroutine(checking());*/
     }
 
+    //WEB FUNCTION piece promotion
     public void piecePromotion(string parameter)
     {
         Destroy(this.transform.GetChild(1).gameObject);

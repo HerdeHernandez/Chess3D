@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 
 public class selectPromotion : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    //animations
     public void OnPointerEnter(PointerEventData eventData)
     {
         this.GetComponent<Image>().color = new Color32(255, 171, 35, 255);

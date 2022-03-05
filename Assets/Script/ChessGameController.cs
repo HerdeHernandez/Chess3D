@@ -56,6 +56,7 @@ public class ChessGameController : MonoBehaviour
 #endif
     }
 
+    //checking for move repetition
     void Update()
     {
         if (myBoard ==  true && otherBoard == true)
@@ -120,6 +121,8 @@ public class ChessGameController : MonoBehaviour
         }
     }
 
+
+    //WEB FUNCTION set my color
     public void MyColor(string data)
     {
 #if UNITY_WEBGL && !UNITY_EDITOR
@@ -141,6 +144,8 @@ public class ChessGameController : MonoBehaviour
 
     }
 
+
+    //piece details
     void pieceDetails(GameObject piece, int rotation, Material material, string tag)
     {
         piece.GetComponent<RectTransform>().localScale = new Vector3(1576.05f, 13572, 1576.05f);
@@ -151,6 +156,7 @@ public class ChessGameController : MonoBehaviour
         piece.gameObject.tag = tag;
     }
 
+    //game start spawn pieces
     public void startGame()
     {
         foreach (Transform child in tilesParent)
@@ -249,6 +255,7 @@ public class ChessGameController : MonoBehaviour
 #endif
     }
 
+    //reset everything on the game
     public void Reset()
     {
         White.Clear();
@@ -284,6 +291,7 @@ public class ChessGameController : MonoBehaviour
         StartCoroutine(checkMate(checkmateColor));
     }
 
+    //checkmate
     public IEnumerator checkMate(string checkmateColor)
     {
         yield return new WaitForSeconds(.05f);
@@ -306,6 +314,7 @@ public class ChessGameController : MonoBehaviour
         //kulay ng nanalo
     }
 
+    //draw by stalemate
     public IEnumerator stalemate()
     {
         yield return new WaitForSeconds(.05f);
@@ -315,6 +324,7 @@ public class ChessGameController : MonoBehaviour
         endPanel.GetComponent<EndGame>().Standing.text = "Draw (Stalemate)";
     }
 
+    //draw by move repetition
     public IEnumerator Draw()
     {
         yield return new WaitForSeconds(.05f);
@@ -324,6 +334,8 @@ public class ChessGameController : MonoBehaviour
         endPanel.GetComponent<EndGame>().Standing.text = "Draw (Move Repetition)";
     }
 
+
+    //timeout
     public IEnumerator timeOut(string player)
     {
         yield return new WaitForSeconds(.05f);
@@ -340,6 +352,7 @@ public class ChessGameController : MonoBehaviour
         }*/
     }
 
+    //resign
     public IEnumerator resign(string email)
     {
         yield return new WaitForSeconds(.05f);

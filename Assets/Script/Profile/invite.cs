@@ -10,6 +10,7 @@ public class invite : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void inviPlayer(string email, string type);
 
+    //invite player
     public void invitePlayer()
     {
         string email = this.transform.parent.parent.GetComponent<playersData>().email;

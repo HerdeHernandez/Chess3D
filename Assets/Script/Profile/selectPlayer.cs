@@ -12,6 +12,7 @@ public class selectPlayer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     [DllImport("__Internal")]
     private static extern void GetImage(string email);
 
+    //player selection
     public void select()
     {
         foreach (Transform children in this.transform.parent)
@@ -34,6 +35,7 @@ public class selectPlayer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
                    "","","");
     }
 
+    //animtations
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (selected == false)
@@ -43,6 +45,7 @@ public class selectPlayer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     }
 
+    //animtations
     public void OnPointerExit(PointerEventData eventData)
     {
         if (selected == false)
@@ -51,6 +54,7 @@ public class selectPlayer : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
     }
 
+    //invite player
     void playerData(string playersName, string rating, string win, string draw, string lose)
     {
         Matching matching = GameObject.Find("Matching").GetComponent<Matching>();

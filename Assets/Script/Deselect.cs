@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Deselect : MonoBehaviour
 {
-    
+    //deselect piece
     public void deselect()
     {
         Transform chessBoard = GameObject.Find("Tiles").transform;
